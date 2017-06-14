@@ -1,7 +1,7 @@
 
 {
-    "key": "API KEY",
-    "client-id": "paraGon",
-    "client-secret": "secrets yay!",
+    "key": "API-KEY",
+    "client-id": "ID",
+    "client-secret": "SECRET",
     "base-uri": "https://developer-paragon.epicgames.com"
 }

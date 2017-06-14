@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"io/ioutil"
 )
 
 
@@ -20,5 +21,10 @@ func Logger(inner http.Handler, name string) http.Handler {
 			name,
 			time.Since(start),
 		)
+
+		err := ioutil.WriteFile("debug_log.txt", []byte(r.Method + " " + r.RequestURI + " " + name + " " + time.Since(start).String()), 0644)
+	    if err != nil {
+	        panic(err)
+	    }
 	})
 }

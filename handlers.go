@@ -3,17 +3,17 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	//"strconv"
 	"net/http"
-	//"net/http/httputil"
-	//"log"
+	"log"
 
 	//"github.com/gorilla/mux"
 )
 
+// 287c233edb7b4fab84d0ef725335ed41 - jack's account id
+// d72de5f52c664cfd9d9da4e952aa1a8e - dream's account id
 
 var epicApiKey, clientId, clientSecret, baseUri string =
-"API KEY", "paraGon", "", "https://developer-paragon.epicgames.com"
+"API-KEY", "paraGon", "", "https://developer-paragon.epicgames.com"
 
 // A person with an Epic account using this API
 type Account struct {
@@ -69,19 +69,6 @@ type Effect struct {
 	Cooldown int
 }
 
-// func createUrl(apiVersion int, uri string) string {
-// 	return baseUri + "/v" + strconv.Itoa(apiVersion) + "/" + uri
-// }
-
-// func makeRequest(httpMethod string, apiVerstion int, uri string, authenticationHeader []string, callback string, requestBody string) {
-// 	// Set up headers
-// 	var headers = make(map[string]string)
-// 	headers["X-Epic-ApiKey"] = epicApiKey
-
-
-// }
-
-
 const loginhtml = `<html><body>
 <a href="/login">Log in to your Epic account</a>
 </body></html>`
@@ -93,29 +80,29 @@ func getIndex(w http.ResponseWriter, r *http.Request) {
 func getLogin(w http.ResponseWriter, r *http.Request) {
 	client := &http.Client{}
 	req, err1 := http.NewRequest("GET", "https://developer-paragon.epicgames.com/v1/auth/login/paraGon", nil)
+	if err1 != nil {
+		log.Fatal("http.NewRequest() FAILURE")
+	}
 	//req, err1 := http.NewRequest("GET", "https://developer-paragon.epicgames.com/v1/account/asdf/stats", nil)
 	req.Header["X-Epic-ApiKey"] = []string{"API-KEY"}
 	req.Header["Accept"] = []string{"application/json"}
 	w.WriteHeader(http.StatusOK)
-	if err1 != nil {
-		// log.Fatal("")
-	}
 
-	for key, value := range req.Header {
-		fmt.Println(key, value)
-	}
-	fmt.Println(req)
+	// for key, value := range req.Header {
+	// 	fmt.Println(key, value)
+	// }
+	// fmt.Println(req)
 
 	resp, err2 := client.Do(req)
 	if err2 != nil {
-		// log.Fatal("")
+		log.Println("client.Do() FAILURE")
 	}
 
 	defer resp.Body.Close()
 	if resp.StatusCode == 200 {
 		bodyBytes, err3 := ioutil.ReadAll(resp.Body)
 		if err3 != nil {
-			// log.Fatal("")
+			log.Println("ioutil.ReadAll() FAILURE")
 		}
 		fmt.Fprintln(w, string(bodyBytes))
 	}

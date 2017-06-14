@@ -12,7 +12,7 @@ func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	// router.Headers(
 	// 	"Context-Type", "application/json",
-	// 	"X-Epic-ApiKey", "API KEY",
+	// 	"X-Epic-ApiKey", "API-KEY",
 	// )
 	for _, route := range routes {
 		var handler http.Handler
