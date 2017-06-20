@@ -1,1 +1,1 @@
-GET / Index 999.8µs
+GET / Index 0s
