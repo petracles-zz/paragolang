@@ -24,8 +24,14 @@ var routes = Routes{
 	Route{
 		"Login",
 		"GET",
-		"/login",
+		"/prime/epic/login",
 		getLogin,
+	},
+	Route{
+		"Login",
+		"GET",
+		"/prime/epic/auth/?code={code}",
+		getAuthToken,
 	},
 	// Route{
 	// 	"Logout",
@@ -33,19 +39,13 @@ var routes = Routes{
 	// 	"/logout",
 	// 	getLogout,
 	// },
-	// Route{
-	// 	"AuthToken",
-	// 	"GET",
-	// 	"/auth",
-	// 	getAuthToken,
-	// },
 	// // - - - - - Accounts routes - - - - -
-	// Route{
-	// 	"Account",
-	// 	"GET",
-	// 	"/account",
-	// 	getAccount,
-	// },
+	Route{
+		"Account",
+		"GET",
+		"/prime/account/{accountId}",
+		getAccount,
+	},
 	// Route{
 	// 	"AccountCards",
 	// 	"GET",
