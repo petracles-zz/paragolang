@@ -7,8 +7,6 @@ import (
 	"net/http"
 	"encoding/base64"
 	"log"
-
-	"github.com/gorilla/mux"
 )
 
 
@@ -151,8 +149,7 @@ func getLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 func getAuthToken(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	code := vars["code"]
+	code := string(r.RequestURI[23:len(r.RequestURI)])
 	b64 := []byte(clientId + ":" + clientSecret)
 
 	headers := make(map[string][]string)
@@ -182,29 +179,7 @@ func getAuthToken(w http.ResponseWriter, r *http.Request) {
 // - - - - - - - - ACCOUNT ROUTES - - - - - - - - - -
 
 func getAccount(w http.ResponseWriter, r *http.Request) {
-	// vars := mux.Vars(r)
-	// accountId := vars["accountId"]
-	// req, err1 := http.NewRequest("GET", baseUri + "/v1/account/" + accountId, nil)
-	// if err1 != nil {
-	// 	log.Println("http.NewRequest() FAILURE")
-	// }
-	// req.Header["X-Epic-ApiKey"] = []string{epicApiKey}
-	// req.Header["Accept"] = []string{"application/json"}
-	// w.WriteHeader(http.StatusOK)
-
-	// resp, err2 := client.Do(req)
-	// if err2 != nil {
-	// 	log.Println("client.Do() FAILURE")
-	// }
-
-	// defer resp.Body.Close()
-	// if resp.StatusCode == 200 {
-	// 	bodyBytes, err3 := ioutil.ReadAll(resp.Body)
-	// 	if err3 != nil {
-	// 		log.Println("ioutil.ReadAll() FAILURE")
-	// 	}
-	// 	fmt.Fprintln(w, string(bodyBytes))
-	// }
+	
 }
 
 
